@@ -7,12 +7,14 @@ public class Movement : MonoBehaviour
     [SerializeField] float mainTrust = 1000f;
     [SerializeField] float rotationTrust = 100f;
     Rigidbody rocketRigidBody;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Start");
         rocketRigidBody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -25,7 +27,12 @@ public class Movement : MonoBehaviour
     // Handle keyboard input: space
     void ProcessTrust() {
         if(Input.GetKey(KeyCode.Space)) {
+            if(!audioSource.isPlaying) {
+                audioSource.Play();
+            }
             rocketRigidBody.AddRelativeForce(Vector3.up * mainTrust * Time.deltaTime);
+        } else {
+            audioSource.Stop();
         }
     }
 
