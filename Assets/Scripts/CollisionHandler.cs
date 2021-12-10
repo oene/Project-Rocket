@@ -15,6 +15,7 @@ public class CollisionHandler : MonoBehaviour
                 break;
             case "Finish":
                 Debug.Log("Finish");
+                NextLevel();
                 break;
             default:
                 Debug.Log("Other...");
@@ -30,5 +31,13 @@ public class CollisionHandler : MonoBehaviour
         // SceneManager.LoadScene("Sandbox");
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
+    }
+
+    void NextLevel() {
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if(nextSceneIndex == SceneManager.sceneCountInBuildSettings) {
+            nextSceneIndex = 0;
+        }
+        SceneManager.LoadScene(nextSceneIndex);
     }
 }
