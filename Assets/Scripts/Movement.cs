@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    // PARAMETERS
     [SerializeField] float mainTrust = 1000f;
     [SerializeField] float rotationTrust = 100f;
+    [SerializeField] AudioClip mainEngine;
+
+    // CACHE
     Rigidbody rocketRigidBody;
     AudioSource audioSource;
 
+    // STATE
+    // bool isAlive;
+
+    // Start / update
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +32,16 @@ public class Movement : MonoBehaviour
         ProcessRotation();
     }
 
+    // Public methods
+    // public int getState() ...
+
+    // Private methods
+
     // Handle keyboard input: space
     void ProcessTrust() {
         if(Input.GetKey(KeyCode.Space)) {
             if(!audioSource.isPlaying) {
-                audioSource.Play();
+                audioSource.PlayOneShot(mainEngine);
             }
             rocketRigidBody.AddRelativeForce(Vector3.up * mainTrust * Time.deltaTime);
         } else {
