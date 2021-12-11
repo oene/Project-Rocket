@@ -1,27 +1,42 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision other)
+
+    [SerializeField] float delayInSeconds = 3f;
+    void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag)
         {
             case "Friendly":
-                Debug.Log("Friendly");
-                break;
-            case "Fuel":
-                Debug.Log("Fuel");
+                StartFriendlySequence();
                 break;
             case "Finish":
-                Debug.Log("Finish");
-                NextLevel();
+                StartSuccessSequence();
                 break;
             default:
-                Debug.Log("Other...");
-                ReloadLevel();
+                StartCrashSequence();
                 break;
         }
+    }
+
+    private void StartFriendlySequence()
+    {
+        // To Do
+    }
+
+    void StartSuccessSequence()
+    {
+        setMovement(false);
+        Invoke("NextLevel", delayInSeconds);
+    }
+
+    void StartCrashSequence()
+    {
+        setMovement(false);
+        Invoke("ReloadLevel", delayInSeconds);
     }
 
     void ReloadLevel()
@@ -31,13 +46,22 @@ public class CollisionHandler : MonoBehaviour
         // SceneManager.LoadScene("Sandbox");
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
+        setMovement(true);
     }
 
-    void NextLevel() {
+    void NextLevel()
+    {
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if(nextSceneIndex == SceneManager.sceneCountInBuildSettings) {
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        {
             nextSceneIndex = 0;
         }
         SceneManager.LoadScene(nextSceneIndex);
+        setMovement(true);
+    }
+
+    void setMovement(bool isEnabled)
+    {
+        GetComponent<Movement>().enabled = isEnabled;
     }
 }
