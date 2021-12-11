@@ -11,13 +11,18 @@ public class CollisionHandler : MonoBehaviour
 
     AudioSource audioSource;
 
-    private void Start() {
+    bool isTransitioning = false;
+
+    private void Start()
+    {
         audioSource = GetComponent<AudioSource>();
     }
 
 
     void OnCollisionEnter(Collision other)
     {
+        if(isTransitioning) { return; }
+
         switch (other.gameObject.tag)
         {
             case "Friendly":
@@ -39,15 +44,13 @@ public class CollisionHandler : MonoBehaviour
 
     void StartSuccessSequence()
     {
-        setMovement(false);
-        audioSource.PlayOneShot(successSound);
+        StopMovementAndPlayAudio(successSound);
         Invoke("NextLevel", delayInSeconds);
     }
 
     void StartCrashSequence()
     {
-        setMovement(false);
-        audioSource.PlayOneShot(crashSound);
+        StopMovementAndPlayAudio(crashSound);
         Invoke("ReloadLevel", delayInSeconds);
     }
 
@@ -58,7 +61,7 @@ public class CollisionHandler : MonoBehaviour
         // SceneManager.LoadScene("Sandbox");
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
-        setMovement(true);
+        // Reloading will reset all values
     }
 
     void NextLevel()
@@ -69,11 +72,13 @@ public class CollisionHandler : MonoBehaviour
             nextSceneIndex = 0;
         }
         SceneManager.LoadScene(nextSceneIndex);
-        setMovement(true);
+        // Reloading will reset all values
     }
 
-    void setMovement(bool isEnabled)
-    {
-        GetComponent<Movement>().enabled = isEnabled;
+    void StopMovementAndPlayAudio(AudioClip audioClip) {
+        isTransitioning = true;
+        GetComponent<Movement>().enabled = false;
+        audioSource.Stop();
+        audioSource.PlayOneShot(audioClip);
     }
 }
