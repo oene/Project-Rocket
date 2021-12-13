@@ -8,9 +8,12 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] float delayInSeconds = 3f;
     [SerializeField] AudioClip successSound;
     [SerializeField] AudioClip crashSound;
+    [SerializeField] ParticleSystem successParticle;
+    [SerializeField] ParticleSystem crashParticle;
+
 
     AudioSource audioSource;
-
+    
     bool isTransitioning = false;
 
     private void Start()
@@ -39,18 +42,20 @@ public class CollisionHandler : MonoBehaviour
 
     private void StartFriendlySequence()
     {
-        // To Do
+        // TO DO
     }
 
     void StartSuccessSequence()
     {
         StopMovementAndPlayAudio(successSound);
+        successParticle.Play();
         Invoke("NextLevel", delayInSeconds);
     }
 
     void StartCrashSequence()
     {
         StopMovementAndPlayAudio(crashSound);
+        crashParticle.Play();
         Invoke("ReloadLevel", delayInSeconds);
     }
 
