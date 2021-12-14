@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,12 +10,11 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] ParticleSystem successParticle;
     [SerializeField] ParticleSystem crashParticle;
 
-
     AudioSource audioSource;
-    
+
     bool isTransitioning = false;
 
-    private void Start()
+    void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
@@ -40,7 +38,7 @@ public class CollisionHandler : MonoBehaviour
         }
     }
 
-    private void StartFriendlySequence()
+    void StartFriendlySequence()
     {
         // TO DO
     }
