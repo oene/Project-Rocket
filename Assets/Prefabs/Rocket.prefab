@@ -87,8 +87,7 @@ MonoBehaviour:
   mainTrust: 1000
   rotationTrust: 100
   mainEngine: {fileID: 8300000, guid: c0e5fd50ea0c25244ae477f1f663e034, type: 3}
-  leftTrusterSound: {fileID: 8300000, guid: c0e5fd50ea0c25244ae477f1f663e034, type: 3}
-  rightTrusterSound: {fileID: 8300000, guid: c0e5fd50ea0c25244ae477f1f663e034, type: 3}
+  trustEngine: {fileID: 8300000, guid: c0e5fd50ea0c25244ae477f1f663e034, type: 3}
   mainBoosterParticle: {fileID: 3823845535209207416}
   leftTrustersParticle: {fileID: 9146577704770734868}
   rightTrustersParticle: {fileID: 6889679099307376170}
@@ -106,7 +105,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

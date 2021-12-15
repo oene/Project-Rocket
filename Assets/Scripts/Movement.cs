@@ -21,7 +21,6 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Start");
         rocketRigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
     }
@@ -67,6 +66,7 @@ public class Movement : MonoBehaviour
         audioSource.Stop();
         mainBoosterParticle.Stop();
     }
+
 
     // Handle keyboard input: A and D
     void ProcessRotation() {
