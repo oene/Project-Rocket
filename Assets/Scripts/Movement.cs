@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     [SerializeField] ParticleSystem rightTrustersParticle;
 
     // STATE
-    // bool isAlive;
+    bool isRotation = false;
 
     // Start / update
     // Start is called before the first frame update
@@ -38,8 +38,9 @@ public class Movement : MonoBehaviour
     // methods
 
     // Handle keyboard input: space
-    void ProcessTrust() {
-        if(Input.GetKey(KeyCode.Space))
+    void ProcessTrust()
+    {
+        if (Input.GetKey(KeyCode.Space))
         {
             BoosterPlay();
         }
@@ -51,6 +52,7 @@ public class Movement : MonoBehaviour
 
     void BoosterPlay()
     {
+        isRotation = false;
         if (!audioSource.isPlaying)
         {
             audioSource.PlayOneShot(mainEngine);
@@ -63,18 +65,22 @@ public class Movement : MonoBehaviour
     }
     void BoosterStop()
     {
-        audioSource.Stop();
+        if (!isRotation)
+        {
+            audioSource.Stop();
+        }
         mainBoosterParticle.Stop();
     }
 
 
     // Handle keyboard input: A and D
-    void ProcessRotation() {
-        if(Input.GetKey(KeyCode.A))
+    void ProcessRotation()
+    {
+        if (Input.GetKey(KeyCode.A))
         {
             RotateLeft();
         }
-        else if(Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
             RotateRight();
         }
@@ -86,6 +92,11 @@ public class Movement : MonoBehaviour
 
     void RotateLeft()
     {
+        isRotation = true;
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(mainEngine);
+        }
         if (!rightTrustersParticle.isPlaying)
         {
             rightTrustersParticle.Play();
@@ -95,6 +106,11 @@ public class Movement : MonoBehaviour
 
     void RotateRight()
     {
+        isRotation = true;
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(mainEngine);
+        }
         if (!leftTrustersParticle.isPlaying)
         {
             leftTrustersParticle.Play();
@@ -104,6 +120,11 @@ public class Movement : MonoBehaviour
 
     void StopRotation()
     {
+        if (isRotation)
+        {
+            audioSource.Stop();
+            isRotation = false;
+        }
         leftTrustersParticle.Stop();
         rightTrustersParticle.Stop();
     }
