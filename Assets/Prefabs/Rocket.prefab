@@ -86,8 +86,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainTrust: 1000
   rotationTrust: 100
-  mainEngine: {fileID: 8300000, guid: c0e5fd50ea0c25244ae477f1f663e034, type: 3}
-  trustEngine: {fileID: 8300000, guid: c0e5fd50ea0c25244ae477f1f663e034, type: 3}
+  mainBoosterClip: {fileID: 8300000, guid: c0e5fd50ea0c25244ae477f1f663e034, type: 3}
+  trustEngineClip: {fileID: 8300000, guid: c0e5fd50ea0c25244ae477f1f663e034, type: 3}
   mainBoosterParticle: {fileID: 3823845535209207416}
   leftTrustersParticle: {fileID: 9146577704770734868}
   rightTrustersParticle: {fileID: 6889679099307376170}

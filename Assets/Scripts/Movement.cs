@@ -5,7 +5,8 @@ public class Movement : MonoBehaviour
     // PARAMETERS
     [SerializeField] float mainTrust = 1000f;
     [SerializeField] float rotationTrust = 100f;
-    [SerializeField] AudioClip mainEngine;
+    [SerializeField] AudioClip mainBoosterClip;
+    [SerializeField] AudioClip trustEngineClip;
 
     // CACHE
     Rigidbody rocketRigidBody;
@@ -55,7 +56,7 @@ public class Movement : MonoBehaviour
         isRotation = false;
         if (!audioSource.isPlaying)
         {
-            audioSource.PlayOneShot(mainEngine);
+            audioSource.PlayOneShot(mainBoosterClip);
         }
         if (!mainBoosterParticle.isPlaying)
         {
@@ -95,7 +96,7 @@ public class Movement : MonoBehaviour
         isRotation = true;
         if (!audioSource.isPlaying)
         {
-            audioSource.PlayOneShot(mainEngine);
+            audioSource.PlayOneShot(trustEngineClip);
         }
         if (!rightTrustersParticle.isPlaying)
         {
@@ -109,7 +110,7 @@ public class Movement : MonoBehaviour
         isRotation = true;
         if (!audioSource.isPlaying)
         {
-            audioSource.PlayOneShot(mainEngine);
+            audioSource.PlayOneShot(trustEngineClip);
         }
         if (!leftTrustersParticle.isPlaying)
         {
